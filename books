@@ -1,0 +1,35 @@
+from collections import Counter
+
+def library(records):
+    # Quick guard check to prevent division by zero if input is empty
+    if not records:
+        return {"avg": 0, "high": 0, "low": 0, "zero": 0, "mode": 0}
+
+    n = len(records)
+    avg = sum(records) / n
+    high = max(records)
+    low = min(records)
+    zero = records.count(0)
+    mode = Counter(records).most_common(1)[0][0]
+    
+    # Return all calculated values as a dictionary
+    return {
+        "avg": avg,
+        "high": high,
+        "low": low,
+        "zero": zero,
+        "mode": mode
+    }
+
+b = input("Enter the book borrow count for members separated by space: ")
+r = [int(x) for x in b.split()]
+
+# Call the function exactly ONCE and store the result
+stats = library(r)
+
+# Access the data using dictionary keys
+print("Average books borrowed:", stats["avg"])
+print("Highest books borrowed:", stats["high"])
+print("Lowest books borrowed:", stats["low"])
+print("Number of members who haven't borrowed any books:", stats["zero"])
+print("Most common books borrowed:", stats["mode"])
